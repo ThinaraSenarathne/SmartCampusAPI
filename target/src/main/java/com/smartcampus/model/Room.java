@@ -9,9 +9,13 @@ package com.smartcampus.model;
  * @author MSII
  */
 
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Room {
     private String id;
     private String name;
