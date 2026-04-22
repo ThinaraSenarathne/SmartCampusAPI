@@ -85,10 +85,9 @@ public class RoomResource {
                     .build();
         }
 
+        // Throw custom exception if room has sensors
         if (!room.getSensorIds().isEmpty()) {
-            return Response.status(Response.Status.CONFLICT)
-                    .entity("{\"error\":\"Cannot delete room. It still has sensors assigned to it\"}")
-                    .build();
+            throw new com.smartcampus.exception.RoomNotEmptyException(roomId);
         }
 
         rooms.remove(roomId);
