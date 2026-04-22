@@ -105,9 +105,9 @@ curl -X DELETE http://localhost:8080/SmartCampusAPI/api/v1/rooms/LIB-301
 ### Part 1.1 — JAX-RS Resource Lifecycle
 
 ### Question: In your report, explain the default lifecycle of a JAX-RS Resource class. Is a
-new instance instantiated for every incoming request, or does the runtime treat it as a
-singleton? Elaborate on how this architectural decision impacts the way you manage and
-synchronize your in-memory data structures (maps/lists) to prevent data loss or race conditions.
+### new instance instantiated for every incoming request, or does the runtime treat it as a
+### singleton? Elaborate on how this architectural decision impacts the way you manage and
+### synchronize your in-memory data structures (maps/lists) to prevent data loss or race conditions.
 
 - By default, JAX-RS creates a new instance of a resource class for every
 incoming HTTP request. This is called request-scoped lifecycle. This means
@@ -121,8 +121,8 @@ be managed carefully to avoid race conditions in a multi-threaded environment.
 ### Part 1.2 — HATEOAS
 
 ### Question: Why is the provision of ”Hypermedia” (links and navigation within responses)
-considered a hallmark of advanced RESTful design (HATEOAS)? How does this approach
-benefit client developers compared to static documentation?
+### considered a hallmark of advanced RESTful design (HATEOAS)? How does this approach
+### benefit client developers compared to static documentation?
 
 - HATEOAS (Hypermedia as the Engine of Application State) means that API
 responses include links to related resources and actions. This is considered
@@ -135,8 +135,8 @@ evolve without breaking existing clients.
 ### Part 2.1 — ID-only vs Full Object Returns
 
 ### Question: When returning a list of rooms, what are the implications of returning only
-IDs versus returning the full room objects? Consider network bandwidth and client side
-processing.
+### IDs versus returning the full room objects? Consider network bandwidth and client side
+### processing.
 
 - Returning only IDs in a list reduces network bandwidth and response size,
 which is beneficial when the client only needs to know what exists.
@@ -149,8 +149,8 @@ complexity and latency.
 ### Part 2.2 — DELETE Idempotency
 
 ### Question: Is the DELETE operation idempotent in your implementation? Provide a detailed
-justification by describing what happens if a client mistakenly sends the exact same DELETE
-request for a room multiple times.
+### justification by describing what happens if a client mistakenly sends the exact same DELETE
+### request for a room multiple times.
 
 - Yes, DELETE is idempotent in this implementation. The first DELETE request
 removes the room and returns 200 OK. Any subsequent DELETE request for the
@@ -163,9 +163,9 @@ server state.
 ### Part 3.1 — @Consumes and Content-Type Mismatch
 
 ### Question: We explicitly use the @Consumes (MediaType.APPLICATION_JSON) annotation on
-the POST method. Explain the technical consequences if a client attempts to send data in
-a different format, such as text/plain or application/xml. How does JAX-RS handle this
-mismatch?
+### the POST method. Explain the technical consequences if a client attempts to send data in
+### a different format, such as text/plain or application/xml. How does JAX-RS handle this
+### mismatch?
 
 - The @Consumes(MediaType.APPLICATION_JSON) annotation tells JAX-RS that the
 endpoint only accepts requests with Content-Type: application/json. If a
@@ -176,9 +176,10 @@ method. This protects the API from receiving data it cannot process.
 
 ### Part 3.2 — @QueryParam vs Path Parameter for Filtering
 
-### Question: You implemented this filtering using @QueryParam. Contrast this with an alternative design where the type is part of the URL path (e.g., /api/vl/sensors/type/CO2). Why
-is the query parameter approach generally considered superior for filtering and searching
-collections?
+### Question: You implemented this filtering using @QueryParam. Contrast this with an alternative design where the type is part of the URL path 
+### (e.g., /api/vl/sensors/type/CO2). Why
+### is the query parameter approach generally considered superior for filtering and searching
+### collections?
 
 - Using @QueryParam for filtering (e.g. /sensors?type=CO2) is superior to
 using a path parameter (e.g. /sensors/type/CO2) because query parameters
@@ -191,8 +192,8 @@ collections.
 ### Part 4.1 — Sub-Resource Locator Pattern
 
 ### Question: Discuss the architectural benefits of the Sub-Resource Locator pattern. How
-does delegating logic to separate classes help manage complexity in large APIs compared
-to defining every nested path (e.g., sensors/{id}/readings/{rid}) in one massive controller class?
+### does delegating logic to separate classes help manage complexity in large APIs compared
+### to defining every nested path (e.g., sensors/{id}/readings/{rid}) in one massive controller class?
 
 - The Sub-Resource Locator pattern delegates request handling to a separate
 class based on the URL path. Instead of defining all nested endpoints in
@@ -217,8 +218,8 @@ not the URL itself.
 ### Part 5.2 — Security Risks of Stack Traces
 
 ### Question: From a cybersecurity standpoint, explain the risks associated with exposing
-internal Java stack traces to external API consumers. What specific information could an
-attacker gather from such a trace?
+### internal Java stack traces to external API consumers. What specific information could an
+### attacker gather from such a trace?
 
 - 404 when the issue is a missing reference inside a valid JSON payload
 Exposing Java stack traces to external API consumers is a serious security
@@ -233,7 +234,7 @@ returning only a generic error message.
 ### Part 5.3 — JAX-RS Filters for Logging
 
 ### Question: Why is it advantageous to use JAX-RS filters for cross-cutting concerns like
-logging, rather than manually inserting Logger.info() statements inside every single resource method?
+### logging, rather than manually inserting Logger.info() statements inside every single resource method?
 
 - Using JAX-RS filters for cross-cutting concerns like logging is superior
 to manually inserting Logger.info() in every resource method because filters
@@ -276,5 +277,5 @@ SmartCampusAPI/
 ```
 ---
 
-*Developed for 5COSC022W Client-Server Architectures Coursework 2025/26*
+*5COSC022W Client-Server Architectures Coursework 2025/26*
 *University of Westminster*
